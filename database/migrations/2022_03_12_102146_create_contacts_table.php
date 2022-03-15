@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContactTable extends Migration
+class CreateContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateContactTable extends Migration
      */
     public function up()
     {
-        Schema::create('contact', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('business_name')->length(50)->nullable();
@@ -21,12 +21,12 @@ class CreateContactTable extends Migration
 
             $table->string('email')->length(50)->nullable();
             $table->string('email_host')->length(50)->nullable();
-            $table->string('website_url')->length(50)->nullable();
-            $table->string('linkedin')->length(50)->nullable();
+            $table->string('website_url')->length(255)->nullable();
+            $table->string('linkedin')->length(255)->nullable();
             $table->string('facebook_profile')->length(50)->nullable();
             $table->string('facebook_messenger')->length(50)->nullable();
-            $table->string('instagram')->length(50)->nullable();
-            $table->string('twitter')->length(50)->nullable();
+            $table->string('instagram')->length(255)->nullable();
+            $table->string('twitter')->length(255)->nullable();
             $table->string('google_rank')->length(50)->nullable();
             
             $table->date('domain_registered')->nullable();
@@ -43,19 +43,19 @@ class CreateContactTable extends Migration
             $table->Integer('instagram_highlight_reel_count')->length(50)->nullable();
             $table->tinyInteger('instagram_is_biz_account')->length(5)->nullable();
             $table->string('instagram_account_name')->length(50)->nullable();
-            $table->tinyInteger('yelp_ads')->length(5)->nullable();
-            $table->tinyInteger('fb_messenger_ads')->length(5)->nullable();
-            $table->tinyInteger('facebook_ads')->length(5)->nullable();
+            $table->string('yelp_ads')->length(5)->nullable();
+            $table->string('fb_messenger_ads')->length(5)->nullable();
+            $table->string('facebook_ads')->length(5)->nullable();
 
-            $table->tinyInteger('instagram_ads')->length(5)->nullable();
-            $table->tinyInteger('adwords_ads')->length(5)->nullable();
-            $table->string('gmaps_url', )->length(5)->nullable();
+            $table->string('instagram_ads')->length(5)->nullable();
+            $table->string('adwords_ads')->length(5)->nullable();
+            $table->string('gmaps_url', )->length(255)->nullable();
 
             $table->string('gmb_claimed')->length(50)->nullable();
 
-            $table->tinyInteger('facebook_pixel')->length(5)->nullable();
-            $table->tinyInteger('google_pixel')->length(5)->nullable();
-            $table->tinyInteger('criteo_pixel')->length(5)->nullable();
+            $table->string('facebook_pixel')->length(5)->nullable();
+            $table->string('google_pixel')->length(5)->nullable();
+            $table->string('criteo_pixel')->length(5)->nullable();
             $table->double('google_stars', 8,2)->nullable();
             $table->Integer('google_count')->length(50)->nullable();
 
@@ -69,14 +69,14 @@ class CreateContactTable extends Migration
             $table->string('state')->length(50)->nullable();
 
             $table->string('zip')->length(50)->nullable();
-            $table->tinyInteger('mobile_friendly')->length(5)->nullable();
-            $table->tinyInteger('google_analytics')->length(5)->nullable();
-            $table->tinyInteger('schema_markup')->length(5)->nullable();
-            $table->tinyInteger('use_wordpress')->length(5)->nullable();
-            $table->tinyInteger('use_shopify')->length(5)->nullable();
-            $table->tinyInteger('linkedin_analytics')->length(5)->nullable();
+            $table->string('mobile_friendly')->length(5)->nullable();
+            $table->string('google_analytics')->length(5)->nullable();
+            $table->string('schema_markup')->length(5)->nullable();
+            $table->string('use_wordpress')->length(5)->nullable();
+            $table->string('use_shopify')->length(5)->nullable();
+            $table->string('linkedin_analytics')->length(5)->nullable();
 
-            $table->json('custom_fields')->nullable();
+            // $table->json('custom_fields')->nullable();
             $table->tinyInteger('status')->default(1);
 
             $table->timestamps();
@@ -95,6 +95,6 @@ class CreateContactTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact');
+        Schema::dropIfExists('contacts');
     }
 }

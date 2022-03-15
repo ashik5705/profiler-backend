@@ -16,7 +16,7 @@ class CreateCustomFieldsTable extends Migration
         Schema::create('custom_fields', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('custom_fields_name')->nullable();
+            $table->json('custom_fields_name')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

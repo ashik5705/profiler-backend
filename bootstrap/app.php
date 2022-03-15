@@ -91,7 +91,7 @@ $app->configure('app');
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
@@ -126,6 +126,12 @@ $app->routeMiddleware([
 ]);
 
 $app->register(App\Providers\AuthServiceProvider::class);
+
+$app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
+
+if (!class_exists('Excel')) {
+    class_alias('Maatwebsite\Excel\Facades\Excel', 'Excel');
+}
 
 // Add this line in the same file:
 

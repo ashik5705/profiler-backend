@@ -23,6 +23,22 @@ $router->get('/version', function () use ($router) {
 
 $router->post('/login','AdminController@login');
 
+$router->post('/create','Admin\FileController@create');
+
+//User Routes
+$router->get('/users','Admin\UserController@getAllUsers');
+$router->post('/user/create','Admin\UserController@createUser');
+$router->get('/user/edit/{id}','Admin\UserController@editUser');
+$router->post('/user/update','Admin\UserController@updateUser');
+$router->delete('/user/delete/{id}','Admin\UserController@deleteUser');
+
+//Tag Routes
+$router->get('/tags','Admin\TagController@getAllTags');
+$router->post('/tag/create','Admin\TagController@createTag');
+//$router->get('/tag/edit/{id}','Admin\TagController@editTag');
+//$router->post('/tag/update','Admin\TagController@updateTag');
+$router->delete('/tag/delete/{id}','Admin\TagController@deleteTag');
+
 // Route::group([
 
 //     'prefix' => 'api'

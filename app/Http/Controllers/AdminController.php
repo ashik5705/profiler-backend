@@ -22,7 +22,7 @@ class AdminController extends Controller
      */
     public function login(Request $request)
     {
-
+        dd(public_path());
         $this->validate($request, [
             'email' => 'required|string',
             'password' => 'required|string',

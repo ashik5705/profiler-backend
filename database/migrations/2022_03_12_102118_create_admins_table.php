@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFileTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateFileTable extends Migration
      */
     public function up()
     {
-        Schema::create('file', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->string('email', 50);
+            $table->string('password', 100);
             $table->tinyInteger('status')->default(1);
-            $table->string('file_name_location', 50);
             $table->timestamps();
-            $table->foreign('user_id')
-                  ->references('id')->on('users')
-                  ->onDelete('cascade');
         });
     }
 
@@ -32,6 +29,6 @@ class CreateFileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file');
+        Schema::dropIfExists('admin');
     }
 }
