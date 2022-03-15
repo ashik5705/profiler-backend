@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Contracts\Repositories\TagRepository;
 use App\Contracts\Services\UserContract;
 use App\Contracts\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -10,11 +11,12 @@ use Validator;
 
 class UserService implements UserContract
 {
-    private $userRepository;
+    private $userRepository, $tagRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, TagRepository $tagRepository)
     {
         $this->userRepository = $userRepository;
+        $this->tagRepository = $tagRepository;
 
     }
 
@@ -22,6 +24,10 @@ class UserService implements UserContract
     {
         return $this->userRepository->getAllUsers();
 
+    }
+
+    public function getLastUser(){
+        return $this->userRepository->getLastUser();
     }
 
     public function createUser($request){
@@ -49,18 +55,13 @@ class UserService implements UserContract
             'status' => $request->status
         ];
 
-        // dd($request->all());
         $userData = $this->userRepository->createUser($user);
+
         $tag = [
-            'user_id' => $userData['id'],
+            'user_id' => $this->getLastUser()->id,
             'tag_value' => '$request->tag_value',
         ];
-
-//        dd($tag);
         $tagData = $this->tagRepository->createTag($tag);
-//        dd($tag);
-
-
     }
 
     public  function editUser($id){

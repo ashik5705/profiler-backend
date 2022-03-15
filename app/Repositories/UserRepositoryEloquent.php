@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Contracts\Repositories\UserRepository;
 use App\Repositories\BaseRepository\BaseRepository;
 use App\Models\User;
+//use DB;
+use Illuminate\Support\Facades\DB;
 
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
@@ -18,6 +20,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $allUsers = $this->model->get();
         return $allUsers;
+    }
+
+    public function getLastUser(){
+        return $this->model->latest()->first();
     }
 
     public function createUser($data){

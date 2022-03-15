@@ -9,4 +9,5 @@ interface UserRepository
     public function editUser($id);
     public function updateUser($user, $id);
     public function deleteUser($id);
+    public function getLastUser();
 }
