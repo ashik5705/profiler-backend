@@ -26,12 +26,7 @@ class UserController extends Controller
 
     public function createUser(Request $request)
     {
-        if($this->userService->createUser($request)){
-            return response()->json('User Inserted successfully!');
-        }else{
-            return response()->json('User not Inserted!');
-        }
-
+        return response()->json($this->userService->createUser($request));
     }
 
     public function editUser($id)

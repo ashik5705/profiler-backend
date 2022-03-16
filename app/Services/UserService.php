@@ -8,15 +8,18 @@ use App\Contracts\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Validator;
+use App\Models\Tag;
+use App\Variables\Variable;
 
 class UserService implements UserContract
 {
-    private $userRepository, $tagRepository;
+    private $userRepository, $tagRepository ,$variable;
 
-    public function __construct(UserRepository $userRepository, TagRepository $tagRepository)
+    public function __construct(UserRepository $userRepository, TagRepository $tagRepository, Variable $variable)
     {
         $this->userRepository = $userRepository;
         $this->tagRepository = $tagRepository;
+        $this->variable = $variable;
 
     }
 
@@ -58,10 +61,11 @@ class UserService implements UserContract
         $userData = $this->userRepository->createUser($user);
 
         $tag = [
-            'user_id' => $this->getLastUser()->id,
-            'tag_value' => '$request->tag_value',
+            'user_id' => $userData['id'],
+            'tag_value' => 'default',
+            'is_default' => $this->variable->DEFAULT_VALUE
         ];
-        $tagData = $this->tagRepository->createTag($tag);
+        return $this->tagRepository->createTag($tag);
     }
 
     public  function editUser($id){

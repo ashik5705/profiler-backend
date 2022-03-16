@@ -18,6 +18,7 @@ class Tag extends Model implements AuthenticatableContract, AuthorizableContract
      *
      * @var array
      */
+    protected $TAG_DEFAULT = 1;
     protected $fillable = [
         'user_id','tag_value',
     ];
